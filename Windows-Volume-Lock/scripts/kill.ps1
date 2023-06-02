@@ -1,4 +1,5 @@
-$toKill = (gcim Win32_Process -f "Name='powershell.exe' AND CommandLine LIKE '%run.ps1%'").ProcessID
+. "$PSScriptRoot.\func.ps1"
+$toKill = End-VolumeLock
 if ($toKill -eq $null)
 {
 	Write-Host "There are no running volume-lock processes."

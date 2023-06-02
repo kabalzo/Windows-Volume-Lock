@@ -9,7 +9,9 @@ $host.ui.RawUI.WindowTitle = 'Volume Lock'
 ###########################
 [string]$defaultVolume = 60
 ###########################
-Import-Module $PSScriptRoot\func.ps1
+. "$PSScriptRoot.\func.ps1"
+Write-Host "Import - outside of main loop"
+#if (
 #For debugging
 Write-Host "PID:"$PID
 #From AudioDeviceCmdlets
@@ -17,6 +19,7 @@ Set-AudioDevice -PlaybackVolume $DefaultVolume
 Write-Host "Default volume set to:"$defaultVolume
 while ($true) 
 {	
+	Write-Host "Begin main loop"
 	$currentVolume = Get-AudioDevice -PlaybackVolume
 	#From .\func.ps1, this is not perfect for instance 7% returns invalid, haven't parsed that out yet
 	$currentVolume = Format-CurrentVolume -CurrentVolume $currentVolume

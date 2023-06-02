@@ -21,4 +21,9 @@ function Format-CurrentVolume
 		return "Invalid volume."
 	}
 }
+function End-VolumeLock
+{
+	$processToEnd = (gcim Win32_Process -f "Name='powershell.exe' AND CommandLine LIKE '%run.ps1%'").ProcessID
+	return $processToEnd
+}
 
